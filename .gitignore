@@ -1,10 +1,12 @@
 *.class
-*.log
+*.iml
 
 # sbt specific
 .cache/
 .history/
+.idea/
 .lib/
+
 dist/*
 target/
 lib_managed/
