@@ -1,4 +1,4 @@
-package bookProblems
+//package bookProblems
 
 import java.io.File
 import java.util.Scanner
@@ -9,7 +9,7 @@ import scala.collection.mutable
  * Created by Gustavo on 9/17/14.
  * Doing the book problems on Maps
  */
-object Maps {
+object Maps extends App{
   def one(): Unit = {
     val prices:Map[String, Double] = Map("PSP" -> 200.0, "Samsung 4K Monitor" -> 600.0, "iPhone 6" -> 200.0)
 //    val expensivePrices = prices.map((_,price) => (_,price*1.2)) //this doesn't work
@@ -76,5 +76,9 @@ object Maps {
 //    }
 //    (lt,eq,gt)
     //uglier but it iterates through the array once.
+  }
+
+  override def main(args: Array[String]) {
+    seven()
   }
 }
