@@ -1,31 +1,26 @@
 package unitCalculator
 
 /**
- * Created by Gustavo on 9/19/14.
+ * Created by Gustavo on 9/21/14.
  */
-class DerivedUnit(val value: Double,val units: Dimension) {
+sealed trait DerivedUnit {
+  def dimen : Dimension
+}
 
-  def *(other: DerivedUnit) : DerivedUnit = {
-    new DerivedUnit(this.value * other.value, this.units * other.units)
+object DerivedUnit {
+  case object N extends DerivedUnit {
+    val dimen = Dimension(Map(SIUnit.kg -> 1, SIUnit.m -> 1, SIUnit.s -> -2))
   }
 
-  def +(other: DerivedUnit) : DerivedUnit = {
-    if(!other.units.equals(this.units)) throw new UnsupportedOperationException
-    new DerivedUnit(this.value + other.value, this.units)
+  case object C extends DerivedUnit {
+    val dimen = Dimension(Map(SIUnit.A -> 1, SIUnit.s -> 1))
   }
 
-  def /(other: DerivedUnit) : DerivedUnit = {
-    new DerivedUnit(this.value / other.value, this.units / other.units)
+  case object J extends DerivedUnit {
+    val dimen = Dimension(Map(SIUnit.kg -> 1, SIUnit.m -> 2, SIUnit.s -> -2))
   }
 
-  def /(other: FundamentalUnit) : DerivedUnit = {
-    new DerivedUnit(this.value / other.value, this.units / other.name)
+  case object W extends DerivedUnit {
+    val dimen = Dimension(Map(SIUnit.kg -> 1, SIUnit.m -> 2, SIUnit.s -> -3))
   }
-
-  def -(other: DerivedUnit) : DerivedUnit = {
-    if(!other.units.equals(this.units)) throw new UnsupportedOperationException
-    new DerivedUnit(this.value + other.value, this.units)
-  }
-
-  override def toString() : String = value + units.toString
 }
