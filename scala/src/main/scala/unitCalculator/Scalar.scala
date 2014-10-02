@@ -12,7 +12,7 @@ object Scalar {
 }
 
 //case class means we get an apply(Double, Dimension)
-case class Scalar(magnitude: Double, dimen : Dimension) {
+case class Scalar(magnitude: Double, dimen : Dimension){
 
   def canAdd(other:Scalar) : Boolean = dimen == other.dimen
 

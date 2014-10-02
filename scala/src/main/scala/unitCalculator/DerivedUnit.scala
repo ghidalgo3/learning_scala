@@ -23,4 +23,5 @@ object DerivedUnit {
   case object W extends DerivedUnit {
     val dimen = Dimension(Map(SIUnit.kg -> 1, SIUnit.m -> 2, SIUnit.s -> -3))
   }
+
 }
