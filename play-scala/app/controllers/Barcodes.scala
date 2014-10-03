@@ -9,8 +9,6 @@ object Barcodes extends Controller {
 
   def barcode(ean: Long) = Action {
 
-    import java.lang.IllegalArgumentException
-
     val MimeType = "image/png"
     try {
       val imageData = ean13BarCode(ean, MimeType)
@@ -29,14 +27,14 @@ object Barcodes extends Controller {
     import org.krysalis.barcode4j.output.bitmap.BitmapCanvasProvider
     import org.krysalis.barcode4j.impl.upcean.EAN13Bean
 
-    var output: ByteArrayOutputStream = new ByteArrayOutputStream
-    var canvas: BitmapCanvasProvider =
+    val output: ByteArrayOutputStream = new ByteArrayOutputStream
+    val canvas: BitmapCanvasProvider =
       new BitmapCanvasProvider(output, mimeType, ImageResolution,
         BufferedImage.TYPE_BYTE_BINARY, false, 0)
 
     val barCode = new EAN13Bean()
     barCode.generateBarcode(canvas, String valueOf ean)
-    canvas.finish
+    canvas.finish()
 
     output.toByteArray
   }
