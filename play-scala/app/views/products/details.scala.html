@@ -3,7 +3,7 @@
 @main(Messages("products.details", product.name)) {
     <h2>
         @tags.barcode(product.ean)
-        @Messages("product.details",product.name)
+        @Messages("products.details", product.name)
     </h2>
 
     <dl>
@@ -16,4 +16,5 @@
         <dt>@Messages("description"):</dt>
         <dd>@product.description</dd>
     </dl>
+    <a href="@controllers.routes.Products.edit(product.ean)" class="btn">@Messages("products.edit.command")</a>
 }
