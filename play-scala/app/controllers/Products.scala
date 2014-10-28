@@ -20,7 +20,11 @@ object Products extends Controller {
    */
   private def eanCheck(ean: Long) = {
     def sumDigits(digits: IndexedSeq[(Char, Int)]): Int = {
-      digits.map { _._1 }.map { _.toInt }.sum
+      digits.map {
+        _._1
+      }.map {
+        _.toInt
+      }.sum
     }
 
     val (singles, triples) = ean.toString.reverse.zipWithIndex.partition {
@@ -31,7 +35,7 @@ object Products extends Controller {
   }
 
   /**
-   * Generates a [[play.api.data.Form]][[[models.Product]]] with a variable
+   * Generates a [[play.api.data.Form]][[[ models.Product]]] with a variable
    * constraint for the “EAN” field.
    *
    * @param error the error message key
@@ -60,7 +64,7 @@ object Products extends Controller {
   private val productForm = makeProductForm("validation.ean.duplicate", isUniqueEan(_))
 
   /**
-   * Generates a [[play.api.data.Form]][[[models.Product]]] with a duplicate-EAN
+   * Generates a [[play.api.data.Form]][[[ models.Product]]] with a duplicate-EAN
    * check for update.
    *
    * @param ean the previous value of the EAN of the to-be-updated product
@@ -74,8 +78,10 @@ object Products extends Controller {
   /**
    * Displays a products list.
    */
-  def list = Action { implicit request =>
-    Ok(views.html.products.list(Product.findAll))
+  def list = {
+    Action { implicit request =>
+      Ok(views.html.products.list(Product.findAll))
+    }
   }
 
   /**
@@ -88,7 +94,6 @@ object Products extends Controller {
       errorForm
     } else
       productForm
-
     Ok(views.html.products.editProduct(form))
   }
 
@@ -124,7 +129,7 @@ object Products extends Controller {
    * Displays a form for editing product details.
    */
   def edit(ean: Long) = Action { implicit request =>
-    val form = if (request2flash.get("error").isDefined)
+    val form = if (request.flash.get("error").isDefined)
       updateProductForm(ean).bind(request2flash.data)
     else
       updateProductForm(ean).fill(Product.findByEan(ean).get)
